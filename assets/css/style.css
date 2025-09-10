@@ -89,17 +89,26 @@ section {
     gap: 20px;
 }
 
-.advantages {
+.spheres-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    padding-right: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0 20px;
 }
 
-.lower-sheet-grid {
+.advantages-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    align-items: start;
+}
+
+.advantage-column {
+    display: flex;
+    flex-direction: column;
     gap: 20px;
+}
+
+.other-traits-title {
     margin-top: 20px;
 }
 
