@@ -51,6 +51,29 @@ function setupEventListeners() {
             handleHealthBoxClick(event.target);
         }
     });
+
+    const addBackgroundBtn = document.getElementById('add-background-btn');
+    if (addBackgroundBtn) {
+        addBackgroundBtn.addEventListener('click', handleAddBackground);
+    }
+}
+
+/**
+ * Handles adding a new background trait to the sheet.
+ */
+function handleAddBackground() {
+    const backgroundsContainer = document.getElementById('backgrounds');
+    if (!backgroundsContainer) return;
+
+    const newBackground = createSingleTraitElement(
+        '___________', // Name for a new blank input
+        5,             // dotCount
+        0,             // initialValue
+        { category: 'advantages', group: 'backgrounds' }, // dataPath
+        {}             // options
+    );
+
+    backgroundsContainer.appendChild(newBackground);
 }
 
 /**
