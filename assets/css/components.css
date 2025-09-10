@@ -119,7 +119,7 @@
     align-items: center;
 }
 
-.add-btn {
+.add-trait-btn {
     background-color: #5a442a;
     color: #f5eeda;
     border: 1px solid #3a2d21;
@@ -133,7 +133,7 @@
     font-weight: bold;
 }
 
-.add-btn:hover {
+.add-trait-btn:hover {
     background-color: #3a2d21;
 }
 
