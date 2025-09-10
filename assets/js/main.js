@@ -25,7 +25,7 @@ function initializeSheet() {
     // Other Traits that don't have a "group"
     createTraitBlock('arete', ['Arete'], 10, 1, { category: 'advantages' }, { customClass: 'vertical-trait' });
     createTraitBlock('willpower', ['Força de Vontade'], 10, 1, { category: 'advantages' }, { customClass: 'vertical-trait' });
-    createTraitBlock('quintessence', ['Quintessência'], 20, 0, { category: 'advantages' }, { markerType: 'checkbox', customClass: 'vertical-trait' });
+    createTraitBlock('quintessence', ['Quintessência'], 20, 0, { category: 'advantages' }, { markerType: 'checkbox', customClass: 'vertical-trait', layout: 'circular' });
 
     // Health Track
     createHealthTrack('health', characterData.health);
