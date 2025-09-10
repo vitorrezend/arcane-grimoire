@@ -89,14 +89,10 @@ section {
     gap: 20px;
 }
 
-.spheres {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px 20px;
-}
-
 .advantages {
-    /* This is no longer a grid container itself, but a child of one. */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
     padding-right: 20px;
 }
 
