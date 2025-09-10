@@ -1,0 +1,102 @@
+body {
+    font-family: 'Georgia', serif;
+    background-color: #333; /* Dark background to see the sheet */
+    color: #3a2d21;
+    line-height: 1.5;
+    padding: 20px;
+}
+
+.character-sheet {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #f5eeda; /* Parchment color */
+    padding: 30px;
+    border: 2px solid #c8a46e; /* Gold border */
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+h1, h2, h3 {
+    font-family: 'Trajan Pro', 'Georgia', serif; /* A more thematic font, with fallback */
+    text-transform: uppercase;
+    color: #5a442a;
+    border-bottom: 2px solid #c8a46e;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 2em;
+    margin-top: 30px;
+}
+
+h3 {
+    font-size: 1.5em;
+    border-bottom: 1px solid #dcd0b9;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.sheet-header {
+    margin-bottom: 30px;
+}
+
+.character-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px 20px;
+}
+
+.info-row {
+    display: flex;
+    align-items: baseline;
+}
+
+.info-row label {
+    font-weight: bold;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+.info-row input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #3a2d21;
+    background-color: transparent;
+    font-family: 'Georgia', serif;
+    font-size: 1em;
+    padding: 2px;
+}
+
+.info-row input:focus {
+    outline: none;
+    border-bottom: 1px solid #c8a46e;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+.attributes, .abilities {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.spheres {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px 20px;
+}
+
+.advantages {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 40px;
+}
