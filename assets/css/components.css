@@ -81,6 +81,13 @@
     color: #3a2d21;
 }
 
+/* Blank Lines for Other Traits */
+.blank-line {
+    border-bottom: 1px solid #3a2d21;
+    height: 25px;
+    margin: 5px 0;
+}
+
 .health-box.lethal::after {
     content: 'X';
     position: absolute;
