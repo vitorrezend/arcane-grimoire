@@ -194,11 +194,12 @@
     padding: 2px 0; /* Consistent padding */
     height: 25px; /* Consistent height */
     box-sizing: border-box; /* Consistent box model */
+    border-bottom: 1px solid transparent; /* Add transparent border to normalize height */
 }
 
 .trait-input {
-    border: none;
-    border-bottom: 1px solid #3a2d21;
+    border: none; /* Reset border to be sure */
+    border-bottom: 1px solid #3a2d21; /* Apply visible border only to input */
     background-color: transparent;
     font-family: 'Georgia', serif;
     padding: 2px 0; /* Adjust padding */
