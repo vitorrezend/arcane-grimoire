@@ -29,6 +29,9 @@ function initializeSheet() {
 
     // Health Track
     createHealthTrack('health', characterData.health);
+
+    // Other Traits
+    createBlankLines('other-traits', 4);
 }
 
 /**
@@ -150,4 +153,26 @@ function handleHealthBoxClick(clickedBox) {
 
     console.log(`Updated health level ${healthLevel.label} to ${healthLevel.state}`);
     console.log(characterData.health);
+}
+
+/**
+ * Creates a specified number of blank, underlined fields in a target element.
+ * @param {string} targetId - The ID of the container element.
+ * @param {number} numberOfLines - The number of blank lines to create.
+ */
+function createBlankLines(targetId, numberOfLines) {
+    const targetElement = document.getElementById(targetId);
+    if (!targetElement) return;
+
+    // Clear placeholder
+    targetElement.innerHTML = '';
+    const fragment = document.createDocumentFragment();
+
+    for (let i = 0; i < numberOfLines; i++) {
+        const line = document.createElement('div');
+        line.className = 'blank-line';
+        fragment.appendChild(line);
+    }
+
+    targetElement.appendChild(fragment);
 }
