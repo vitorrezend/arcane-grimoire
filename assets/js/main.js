@@ -45,8 +45,8 @@ function setupEventListeners() {
     const sheet = document.querySelector('.character-sheet');
     if (!sheet) return;
 
+    // Existing event listeners for sheet interactions
     sheet.addEventListener('click', (event) => {
-        // More specific checks must come before general ones.
         if (event.target.classList.contains('marker') && event.target.closest('#quintessence')) {
             handleQuintessenceClick(event.target);
         } else if (event.target.classList.contains('checkbox-marker') && event.target.closest('#willpower-temporary')) {
@@ -67,6 +67,12 @@ function setupEventListeners() {
             handleAddTrait(targetId, dataPath);
         }
     });
+
+    // Event listener for the PDF button
+    const pdfButton = document.getElementById('generate-pdf-btn');
+    if (pdfButton) {
+        pdfButton.addEventListener('click', generatePdf);
+    }
 }
 
 /**
