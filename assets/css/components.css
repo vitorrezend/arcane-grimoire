@@ -39,19 +39,3 @@
     background-color: #3a2d21;
     border-color: #3a2d21;
 }
-
-/* Styles for the editable trait names */
-.trait-input {
-    background-color: transparent;
-    border: none;
-    border-bottom: 1px solid #000; /* Underline effect */
-    flex-basis: 60%; /* Same as label */
-    font-size: 1em;
-    font-family: inherit; /* Use the same font as the rest of the sheet */
-    padding: 2px 0;
-}
-
-.trait-input:focus {
-    outline: none; /* Remove default focus outline */
-    border-bottom: 1px solid #555; /* Slightly change color on focus */
-}

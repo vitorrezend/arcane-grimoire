@@ -26,6 +26,9 @@ function initializeSheet() {
     createTraitBlock('arete', ['Arete'], 10, 1, { category: 'advantages' });
     createTraitBlock('willpower', ['Força de Vontade'], 10, 1, { category: 'advantages' });
     createTraitBlock('quintessence', ['Quintessência'], 20, 0, { category: 'advantages' });
+
+    // Health Track
+    createHealthTrack('health', characterData.health);
 }
 
 /**
@@ -38,6 +41,8 @@ function setupEventListeners() {
     sheet.addEventListener('click', (event) => {
         if (event.target.classList.contains('dot')) {
             handleDotClick(event.target);
+        } else if (event.target.classList.contains('health-box')) {
+            handleHealthBoxClick(event.target);
         }
     });
 }
@@ -106,4 +111,66 @@ function handleDotClick(clickedDot) {
     } catch (e) {
         console.error(`Error updating data model for trait: ${traitName}`, e);
     }
+}
+
+/**
+ * Creates the health track UI.
+ * @param {string} targetId - The ID of the container element.
+ * @param {Array<object>} healthLevels - The array of health level data.
+ */
+function createHealthTrack(targetId, healthLevels) {
+    const targetElement = document.getElementById(targetId);
+    if (!targetElement) return;
+
+    targetElement.innerHTML = '';
+    const fragment = document.createDocumentFragment();
+
+    healthLevels.forEach((level, index) => {
+        const levelDiv = document.createElement('div');
+        levelDiv.className = 'health-level';
+
+        const label = document.createElement('span');
+        label.className = 'health-label';
+        label.textContent = level.label;
+
+        const penalty = document.createElement('span');
+        penalty.className = 'health-penalty';
+        penalty.textContent = level.penalty !== null ? `[${level.penalty}]` : '[-]';
+
+        const box = document.createElement('div');
+        box.className = 'health-box';
+        box.dataset.index = index; // Store index to update data model
+
+        levelDiv.appendChild(label);
+        levelDiv.appendChild(penalty);
+        levelDiv.appendChild(box);
+        fragment.appendChild(levelDiv);
+    });
+
+    targetElement.appendChild(fragment);
+}
+
+/**
+ * Handles clicks on a health box, cycling through damage states.
+ * @param {HTMLElement} clickedBox - The health box that was clicked.
+ */
+function handleHealthBoxClick(clickedBox) {
+    const index = parseInt(clickedBox.dataset.index, 10);
+    const healthLevel = characterData.health[index];
+
+    // Cycle through states: ok -> bashing -> lethal -> ok
+    if (healthLevel.state === 'ok') {
+        healthLevel.state = 'bashing';
+        clickedBox.classList.add('bashing');
+    } else if (healthLevel.state === 'bashing') {
+        healthLevel.state = 'lethal';
+        clickedBox.classList.remove('bashing');
+        clickedBox.classList.add('lethal');
+    } else if (healthLevel.state === 'lethal') {
+        healthLevel.state = 'ok';
+        clickedBox.classList.remove('lethal');
+    }
+
+    console.log(`Updated health level ${healthLevel.label} to ${healthLevel.state}`);
+    console.log(characterData.health);
 }
