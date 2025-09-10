@@ -46,16 +46,17 @@ function setupEventListeners() {
     if (!sheet) return;
 
     sheet.addEventListener('click', (event) => {
-        if (event.target.classList.contains('marker')) {
+        // More specific checks must come before general ones.
+        if (event.target.classList.contains('marker') && event.target.closest('#quintessence')) {
+            handleQuintessenceClick(event.target);
+        } else if (event.target.classList.contains('checkbox-marker') && event.target.closest('#willpower-temporary')) {
+            handleTempCheckboxClick(event.target);
+        } else if (event.target.classList.contains('marker')) {
             handleDotClick(event.target);
         } else if (event.target.classList.contains('health-box')) {
             handleHealthBoxClick(event.target);
         } else if (event.target.classList.contains('remove-btn')) {
             handleRemoveTrait(event.target);
-        } else if (event.target.classList.contains('checkbox-marker') && event.target.closest('#willpower-temporary')) {
-            handleTempCheckboxClick(event.target);
-        } else if (event.target.classList.contains('marker') && event.target.closest('#quintessence')) {
-            handleQuintessenceClick(event.target);
         }
     });
 
