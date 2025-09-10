@@ -82,7 +82,8 @@
 
 .checkbox-grid {
     display: flex;
-    gap: 4px;
+    /* The gap is removed to allow the margin-left on the markers to control spacing,
+       just like the .dots container, ensuring the total width is identical. */
     justify-content: center;
     margin-top: 10px;
 }
