@@ -18,7 +18,7 @@ function createTraitBlock(targetId, traitNames, dotCount = 5, initialValue = 1, 
     targetElement.innerHTML = '';
 
     const fragment = document.createDocumentFragment();
-    const { markerType = 'dots', customClass = '' } = options;
+    const { markerType = 'dots', customClass = '', layout = 'linear' } = options;
 
     for (const name of traitNames) {
         // Create the main container for the trait
@@ -52,6 +52,9 @@ function createTraitBlock(targetId, traitNames, dotCount = 5, initialValue = 1, 
         // Create the markers container
         const markersDiv = document.createElement('div');
         markersDiv.className = 'dots'; // Keep class for styling consistency
+        if (layout === 'circular') {
+            markersDiv.classList.add('circular-container');
+        }
 
         // Create the individual markers (dots or checkboxes)
         for (let i = 1; i <= dotCount; i++) {
@@ -66,6 +69,19 @@ function createTraitBlock(targetId, traitNames, dotCount = 5, initialValue = 1, 
             }
             // Add data-value for later use in event handling
             marker.dataset.value = i;
+
+            if (layout === 'circular') {
+                const angle = (360 / dotCount) * i;
+                const radius = 80; // pixels
+                marker.style.position = 'absolute';
+                // To position from the center of the container, we set top and left to 50%
+                marker.style.top = '50%';
+                marker.style.left = '50%';
+                // We use a margin to offset the marker's own size before transforming
+                marker.style.margin = '-8px'; // Half of marker size (16px)
+                marker.style.transform = `rotate(${angle}deg) translate(${radius}px) rotate(${-angle}deg)`;
+            }
+
             markersDiv.appendChild(marker);
         }
 
