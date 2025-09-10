@@ -74,15 +74,24 @@
             <h2>Habilidades</h2>
             <div class="abilities">
                 <div class="ability-group">
-                    <h3>Talentos</h3>
+                    <div class="advantage-title-container">
+                        <h3>Talentos</h3>
+                        <button class="add-trait-btn" data-target="talents" data-category="abilities" data-group="talents">+</button>
+                    </div>
                     <div id="talents"><!-- Gerado por JS --></div>
                 </div>
                 <div class="ability-group">
-                    <h3>Perícias</h3>
+                    <div class="advantage-title-container">
+                        <h3>Perícias</h3>
+                        <button class="add-trait-btn" data-target="skills" data-category="abilities" data-group="skills">+</button>
+                    </div>
                     <div id="skills"><!-- Gerado por JS --></div>
                 </div>
                 <div class="ability-group">
-                    <h3>Conhecimentos</h3>
+                    <div class="advantage-title-container">
+                        <h3>Conhecimentos</h3>
+                        <button class="add-trait-btn" data-target="knowledges" data-category="abilities" data-group="knowledges">+</button>
+                    </div>
                     <div id="knowledges"><!-- Gerado por JS --></div>
                 </div>
             </div>
@@ -101,10 +110,13 @@
                 <div class="advantage-group">
                     <div class="advantage-title-container">
                         <h3>Antecedentes</h3>
-                        <button id="add-background-btn" class="add-btn">+</button>
+                        <button class="add-trait-btn" data-target="backgrounds" data-category="advantages" data-group="backgrounds">+</button>
                     </div>
                     <div id="backgrounds"><!-- Gerado por JS --></div>
-                    <h3 class="other-traits-title">Outras Características</h3>
+                    <div class="advantage-title-container">
+                        <h3 class="other-traits-title">Outras Características</h3>
+                        <button class="add-trait-btn" data-target="other-traits" data-category="advantages" data-group="other-traits">+</button>
+                    </div>
                     <div id="other-traits"><!-- Gerado por JS --></div>
                 </div>
 

@@ -57,13 +57,16 @@ function setupEventListeners() {
             handleHealthBoxClick(event.target);
         } else if (event.target.classList.contains('remove-btn')) {
             handleRemoveTrait(event.target);
+        } else if (event.target.classList.contains('add-trait-btn')) {
+            const button = event.target;
+            const targetId = button.dataset.target;
+            const dataPath = {
+                category: button.dataset.category,
+                group: button.dataset.group
+            };
+            handleAddTrait(targetId, dataPath);
         }
     });
-
-    const addBackgroundBtn = document.getElementById('add-background-btn');
-    if (addBackgroundBtn) {
-        addBackgroundBtn.addEventListener('click', handleAddBackground);
-    }
 }
 
 /**
@@ -78,21 +81,23 @@ function handleRemoveTrait(buttonElement) {
 }
 
 /**
- * Handles adding a new background trait to the sheet.
+ * Handles adding a new trait to the sheet.
+ * @param {string} targetId - The ID of the container to add the trait to.
+ * @param {object} dataPath - The path to the data in the character model.
  */
-function handleAddBackground() {
-    const backgroundsContainer = document.getElementById('backgrounds');
-    if (!backgroundsContainer) return;
+function handleAddTrait(targetId, dataPath) {
+    const container = document.getElementById(targetId);
+    if (!container) return;
 
-    const newBackground = createSingleTraitElement(
+    const newTrait = createSingleTraitElement(
         '___________', // Name for a new blank input
         5,             // dotCount
         0,             // initialValue
-        { category: 'advantages', group: 'backgrounds' }, // dataPath
+        dataPath,      // dataPath
         {}             // options
     );
 
-    backgroundsContainer.appendChild(newBackground);
+    container.appendChild(newTrait);
 }
 
 /**
