@@ -96,7 +96,24 @@ section {
 }
 
 .advantages {
+    /* This is no longer a grid container itself, but a child of one. */
+    padding-right: 20px;
+}
+
+.lower-sheet-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.bottom-traits {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px 40px;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.quintessence-section h3 {
+    text-align: center;
 }
