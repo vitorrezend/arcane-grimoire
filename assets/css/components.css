@@ -92,6 +92,30 @@
     text-align: center;
 }
 
+.advantage-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-btn {
+    background-color: #5a442a;
+    color: #f5eeda;
+    border: 1px solid #3a2d21;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 18px;
+    line-height: 22px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+}
+
+.add-btn:hover {
+    background-color: #3a2d21;
+}
+
 .circular-container {
     position: relative;
     width: 180px;
