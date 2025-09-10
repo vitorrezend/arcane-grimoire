@@ -6,7 +6,7 @@
  * @param {number} [dotCount=5] - The total number of dots for each trait.
  * @param {number} [initialValue=1] - The number of dots that should be pre-filled.
  */
-function createTraitBlock(targetId, traitNames, dotCount = 5, initialValue = 1, dataPath = null) {
+function createTraitBlock(targetId, traitNames, dotCount = 5, initialValue = 1, dataPath = null, options = {}) {
     const targetElement = document.getElementById(targetId);
 
     if (!targetElement) {
@@ -18,11 +18,15 @@ function createTraitBlock(targetId, traitNames, dotCount = 5, initialValue = 1, 
     targetElement.innerHTML = '';
 
     const fragment = document.createDocumentFragment();
+    const { markerType = 'dots', customClass = '' } = options;
 
     for (const name of traitNames) {
         // Create the main container for the trait
         const traitDiv = document.createElement('div');
         traitDiv.className = 'trait';
+        if (customClass) {
+            traitDiv.classList.add(customClass);
+        }
 
         // Add data attributes for easy mapping back to the data model
         if (dataPath) {
@@ -45,25 +49,29 @@ function createTraitBlock(targetId, traitNames, dotCount = 5, initialValue = 1, 
             nameElement.textContent = name;
         }
 
-        // Create the dots container
-        const dotsDiv = document.createElement('div');
-        dotsDiv.className = 'dots';
+        // Create the markers container
+        const markersDiv = document.createElement('div');
+        markersDiv.className = 'dots'; // Keep class for styling consistency
 
-        // Create the individual dots
+        // Create the individual markers (dots or checkboxes)
         for (let i = 1; i <= dotCount; i++) {
-            const dot = document.createElement('span');
-            dot.className = 'dot';
+            const marker = document.createElement(markerType === 'checkbox' ? 'div' : 'span');
+            marker.className = markerType === 'checkbox' ? 'checkbox-marker' : 'dot';
+
+            // Add a common class for event handling
+            marker.classList.add('marker');
+
             if (i <= initialValue) {
-                dot.classList.add('filled');
+                marker.classList.add('filled');
             }
             // Add data-value for later use in event handling
-            dot.dataset.value = i;
-            dotsDiv.appendChild(dot);
+            marker.dataset.value = i;
+            markersDiv.appendChild(marker);
         }
 
         // Assemble the trait element
         traitDiv.appendChild(nameElement);
-        traitDiv.appendChild(dotsDiv);
+        traitDiv.appendChild(markersDiv);
 
         // Add the complete trait to the document fragment
         fragment.appendChild(traitDiv);
