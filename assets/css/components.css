@@ -39,3 +39,55 @@
     background-color: #3a2d21;
     border-color: #3a2d21;
 }
+
+/* Health Track Styles */
+.health-level {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    border-bottom: 1px solid #dcd0b9;
+}
+
+.health-label {
+    flex-grow: 1;
+}
+
+.health-penalty {
+    margin-left: 10px;
+    min-width: 25px;
+    text-align: right;
+}
+
+.health-box {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #3a2d21;
+    margin-left: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    position: relative;
+}
+
+/* Different states for health boxes: bashing, lethal, aggravated */
+.health-box.bashing::after {
+    content: '/';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #3a2d21;
+}
+
+.health-box.lethal::after {
+    content: 'X';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #3a2d21;
+}
