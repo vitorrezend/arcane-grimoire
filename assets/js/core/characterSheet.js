@@ -71,15 +71,15 @@ const characterData = {
         willpower: 1,
         quintessence: 0,
     },
-    health: {
-        bruised: false,
-        hurt: false,
-        injured: false,
-        wounded: false,
-        mauled: false,
-        crippled: false,
-        incapacitated: false
-    }
+    health: [
+        { label: 'Escoriado', penalty: 0, state: 'ok' },
+        { label: 'Machucado', penalty: -1, state: 'ok' },
+        { label: 'Ferido', penalty: -1, state: 'ok' },
+        { label: 'Ferido Gravemente', penalty: -2, state: 'ok' },
+        { label: 'Espancado', penalty: -2, state: 'ok' },
+        { label: 'Aleijado', penalty: -5, state: 'ok' },
+        { label: 'Incapacitado', penalty: null, state: 'ok' }
+    ]
 };
 
 // This file defines the data model.
