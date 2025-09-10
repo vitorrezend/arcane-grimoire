@@ -1,0 +1,39 @@
+services:
+  # Serviço para o banco de dados PostgreSQL
+  db:
+    image: postgres:latest
+    container_name: rpg-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: senha
+      POSTGRES_DB: rpg_database
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  # Serviço para o banco de dados MongoDB
+  mongodb:
+    image: mongo:latest
+    container_name: rpg-mongodb
+    restart: always
+    volumes:
+      - ./data/mongodb:/data/db
+    ports:
+      - "27017:27017"
+
+  # Serviço para o seu backend em Rust
+  backend:
+    build:
+      context: . 
+      dockerfile: .\backend\Dockerfile
+    container_name: rpg-backend
+    #restart: always
+    depends_on:
+      - db
+      - mongodb
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app

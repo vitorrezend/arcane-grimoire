@@ -1,0 +1,3 @@
+db.fichas.find()
+use rpg_database
+show dbs
