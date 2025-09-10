@@ -1,0 +1,41 @@
+.trait {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    padding: 4px;
+    border-bottom: 1px dotted #dcd0b9;
+}
+
+.trait-label {
+    font-size: 1em;
+    flex-basis: 60%; /* Give label enough space */
+    text-transform: capitalize;
+}
+
+.dots {
+    flex-basis: 40%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.dot {
+    height: 14px;
+    width: 14px;
+    background-color: #fff;
+    border: 1px solid #3a2d21;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.dot:hover {
+    background-color: #e0d8c4;
+}
+
+.dot.filled {
+    background-color: #3a2d21;
+    border-color: #3a2d21;
+}
