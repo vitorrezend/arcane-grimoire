@@ -19,6 +19,16 @@
     border-color: #3a2d21;
 }
 
+.checkbox-marker.quint-filled {
+    background-color: #4a90e2; /* Blue */
+    border-color: #4a90e2;
+}
+
+.checkbox-marker.paradox-filled {
+    background-color: #d0021b; /* Red */
+    border-color: #d0021b;
+}
+
 .checkbox-marker {
     width: 14px;
     height: 14px;
@@ -153,6 +163,14 @@
     margin: 20px auto;
     padding: 0;
     border-radius: 50%;
+}
+
+.paradox-label {
+    text-align: center;
+    font-family: 'Trajan Pro', 'Georgia', serif;
+    text-transform: uppercase;
+    color: #5a442a;
+    margin-top: 10px;
 }
 
 /* Trait Block Styles */
