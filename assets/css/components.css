@@ -60,6 +60,40 @@
     color: #3a2d21;
 }
 
+/* Trait Block Styles */
+.trait {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.trait-label, .trait-input {
+    flex-grow: 1;
+    margin-right: 10px;
+    font-size: 1em; /* Ensure consistent font size */
+}
+
+.trait-input {
+    border: none;
+    border-bottom: 1px solid #3a2d21;
+    background-color: transparent;
+    font-family: 'Georgia', serif;
+    padding: 2px 0; /* Adjust padding */
+    width: 100%; /* Ensure it takes available width */
+}
+
+.trait-input:focus {
+    outline: none;
+    border-bottom-color: #c8a46e;
+}
+
+.dots {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+}
+
 /* Blank Lines for Other Traits */
 .blank-line {
     border-bottom: 1px solid #3a2d21;
