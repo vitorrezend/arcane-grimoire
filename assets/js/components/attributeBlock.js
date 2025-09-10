@@ -32,10 +32,18 @@ function createTraitBlock(targetId, traitNames, dotCount = 5, initialValue = 1, 
             }
         }
 
-        // Create the label
-        const label = document.createElement('label');
-        label.className = 'trait-label';
-        label.textContent = name;
+        // Create the label or an input field if the name consists of underscores
+        let nameElement;
+        if (/^_{5,}$/.test(name)) {
+            nameElement = document.createElement('input');
+            nameElement.type = 'text';
+            nameElement.className = 'trait-input';
+            nameElement.placeholder = 'Vantagem'; // Placeholder text
+        } else {
+            nameElement = document.createElement('label');
+            nameElement.className = 'trait-label';
+            nameElement.textContent = name;
+        }
 
         // Create the dots container
         const dotsDiv = document.createElement('div');
@@ -54,7 +62,7 @@ function createTraitBlock(targetId, traitNames, dotCount = 5, initialValue = 1, 
         }
 
         // Assemble the trait element
-        traitDiv.appendChild(label);
+        traitDiv.appendChild(nameElement);
         traitDiv.appendChild(dotsDiv);
 
         // Add the complete trait to the document fragment

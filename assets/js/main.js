@@ -58,7 +58,8 @@ function handleDotClick(clickedDot) {
     const dotsContainer = clickedDot.parentElement;
     const allDots = dotsContainer.querySelectorAll('.dot');
     const clickedValue = parseInt(clickedDot.dataset.value, 10);
-    const traitName = traitDiv.querySelector('.trait-label').textContent;
+    const nameElement = traitDiv.querySelector('.trait-label') || traitDiv.querySelector('.trait-input');
+    const traitName = nameElement.tagName === 'LABEL' ? nameElement.textContent : nameElement.value;
 
     const { category, group } = traitDiv.dataset;
 
@@ -74,16 +75,38 @@ function handleDotClick(clickedDot) {
     // Update Data Model
     try {
         if (group) {
-            characterData[category][group][traitName] = newValue;
+            // For groups like 'backgrounds', the traitName is the key.
+            // If the trait is an input field, its name can change. We need to handle this.
+            const nameElement = traitDiv.querySelector('.trait-input');
+            if (nameElement) {
+                // It's a background or similar editable trait
+                const oldTraitName = nameElement.dataset.currentName;
+                const newTraitName = nameElement.value.trim();
+
+                // If the name has changed, remove the old entry
+                if (oldTraitName && oldTraitName !== newTraitName && characterData[category][group][oldTraitName]) {
+                    delete characterData[category][group][oldTraitName];
+                }
+
+                // Add the new or updated trait, but only if it has a name
+                if (newTraitName) {
+                    characterData[category][group][newTraitName] = newValue;
+                    nameElement.dataset.currentName = newTraitName; // Remember the new name
+                }
+                 console.log(`Updated ${category}.${group}.${newTraitName} to ${newValue}`);
+            } else {
+                 // For fixed traits (attributes, abilities), the key is static
+                characterData[category][group][traitName] = newValue;
+                 console.log(`Updated ${category}.${group}.${traitName} to ${newValue}`);
+            }
         } else {
             // Handle traits that are direct children of a category (Arete, Willpower)
-            // The trait name might be different from the key in characterData.
             const dataKey = Object.keys(characterData[category]).find(k => k.toLowerCase() === traitName.toLowerCase());
-            if(dataKey) {
+            if (dataKey) {
                 characterData[category][dataKey] = newValue;
             }
+             console.log(`Updated ${category}.${traitName} to ${newValue}`);
         }
-        console.log(`Updated ${category}.${group || ''}.${traitName} to ${newValue}`);
         console.log(characterData); // Verify the change
     } catch (e) {
         console.error(`Error updating data model for trait: ${traitName}`, e);
