@@ -51,6 +51,8 @@ function setupEventListeners() {
             handleHealthBoxClick(event.target);
         } else if (event.target.classList.contains('remove-btn')) {
             handleRemoveTrait(event.target);
+        } else if (event.target.classList.contains('checkbox-marker') && event.target.closest('#willpower-temporary')) {
+            handleTempCheckboxClick(event.target);
         }
     });
 
@@ -223,7 +225,7 @@ function handleHealthBoxClick(clickedBox) {
     const index = parseInt(clickedBox.dataset.index, 10);
     const healthLevel = characterData.health[index];
 
-    // Cycle through states: ok -> bashing -> lethal -> ok
+    // Cycle through states: ok -> bashing -> lethal -> aggravated -> ok
     if (healthLevel.state === 'ok') {
         healthLevel.state = 'bashing';
         clickedBox.classList.add('bashing');
@@ -232,12 +234,24 @@ function handleHealthBoxClick(clickedBox) {
         clickedBox.classList.remove('bashing');
         clickedBox.classList.add('lethal');
     } else if (healthLevel.state === 'lethal') {
-        healthLevel.state = 'ok';
+        healthLevel.state = 'aggravated';
         clickedBox.classList.remove('lethal');
+        clickedBox.classList.add('aggravated');
+    } else if (healthLevel.state === 'aggravated') {
+        healthLevel.state = 'ok';
+        clickedBox.classList.remove('aggravated');
     }
 
     console.log(`Updated health level ${healthLevel.label} to ${healthLevel.state}`);
     console.log(characterData.health);
+}
+
+/**
+ * Handles clicks on the temporary willpower checkboxes.
+ * @param {HTMLElement} checkboxElement - The checkbox element that was clicked.
+ */
+function handleTempCheckboxClick(checkboxElement) {
+    checkboxElement.classList.toggle('filled');
 }
 
 /**
