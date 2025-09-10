@@ -69,7 +69,7 @@ const characterData = {
         },
         arete: 1,
         willpower: 1,
-        quintessence: 0,
+        quintessence: Array(20).fill('empty'),
     },
     health: [
         { label: 'Escoriado', penalty: 0, state: 'ok' },

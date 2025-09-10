@@ -25,13 +25,14 @@ function initializeSheet() {
     // Other Traits that don't have a "group"
     createTraitBlock('arete', ['Arete'], 10, 1, { category: 'advantages' }, { customClass: 'vertical-trait' });
     createTraitBlock('willpower', ['Força de Vontade'], 10, 1, { category: 'advantages' }, { customClass: 'vertical-trait' });
-    createTraitBlock('quintessence', ['Quintessência'], 20, 0, { category: 'advantages' }, { markerType: 'checkbox', customClass: 'vertical-trait', layout: 'circular' });
+    createTraitBlock('quintessence', ['Quintessência'], 20, 0, { category: 'advantages', group: 'quintessence' }, { markerType: 'checkbox', customClass: 'vertical-trait', layout: 'circular', individualMarkers: true });
 
     // Health Track
     createHealthTrack('health', characterData.health);
 
     // Other Traits
-    createBlankLines('other-traits', 4);
+    const otherTraits = Array(5).fill('___________');
+    createTraitBlock('other-traits', otherTraits, 5, 0, { category: 'advantages', group: 'other-traits' });
 
     // Add temporary willpower checkboxes
     createCheckboxGrid('willpower-temporary', 10);
@@ -53,6 +54,8 @@ function setupEventListeners() {
             handleRemoveTrait(event.target);
         } else if (event.target.classList.contains('checkbox-marker') && event.target.closest('#willpower-temporary')) {
             handleTempCheckboxClick(event.target);
+        } else if (event.target.classList.contains('marker') && event.target.closest('#quintessence')) {
+            handleQuintessenceClick(event.target);
         }
     });
 
@@ -252,6 +255,39 @@ function handleHealthBoxClick(clickedBox) {
  */
 function handleTempCheckboxClick(checkboxElement) {
     checkboxElement.classList.toggle('filled');
+}
+
+/**
+ * Handles clicks on the Quintessence markers.
+ * @param {HTMLElement} element - The marker element that was clicked.
+ */
+function handleQuintessenceClick(element) {
+    // Ensure we are only acting on the markers themselves
+    if (!element.classList.contains('marker')) return;
+
+    const index = parseInt(element.dataset.index, 10);
+    if (isNaN(index)) return;
+
+    const currentState = characterData.advantages.quintessence[index];
+    let nextState;
+
+    // Cycle through states: empty -> quintessence -> paradox -> empty
+    if (currentState === 'empty') {
+        nextState = 'quintessence';
+        element.classList.add('quint-filled');
+    } else if (currentState === 'quintessence') {
+        nextState = 'paradox';
+        element.classList.remove('quint-filled');
+        element.classList.add('paradox-filled');
+    } else { // currentState is 'paradox'
+        nextState = 'empty';
+        element.classList.remove('paradox-filled');
+    }
+
+    // Update the data model
+    characterData.advantages.quintessence[index] = nextState;
+    console.log(`Updated Quintessence point ${index} to ${nextState}`);
+    console.log(characterData.advantages.quintessence);
 }
 
 /**
