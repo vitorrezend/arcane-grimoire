@@ -49,12 +49,25 @@ function setupEventListeners() {
             handleDotClick(event.target);
         } else if (event.target.classList.contains('health-box')) {
             handleHealthBoxClick(event.target);
+        } else if (event.target.classList.contains('remove-btn')) {
+            handleRemoveTrait(event.target);
         }
     });
 
     const addBackgroundBtn = document.getElementById('add-background-btn');
     if (addBackgroundBtn) {
         addBackgroundBtn.addEventListener('click', handleAddBackground);
+    }
+}
+
+/**
+ * Handles removing a trait element from the sheet.
+ * @param {HTMLElement} buttonElement - The remove button that was clicked.
+ */
+function handleRemoveTrait(buttonElement) {
+    const traitElement = buttonElement.closest('.trait');
+    if (traitElement) {
+        traitElement.remove();
     }
 }
 
