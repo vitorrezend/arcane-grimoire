@@ -82,10 +82,22 @@
 
 .checkbox-grid {
     display: flex;
-    flex-wrap: wrap;
     gap: 4px;
     justify-content: center;
     margin-top: 10px;
+}
+
+.centered-title {
+    text-align: center;
+}
+
+.circular-container {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 20px auto;
+    padding: 0;
+    border-radius: 50%;
 }
 
 /* Trait Block Styles */
