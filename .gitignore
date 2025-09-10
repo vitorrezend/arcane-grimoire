@@ -1,0 +1,28 @@
+# Arquivos do Rust/Cargo
+# Pasta de build e binários gerados pelo Cargo
+/target/
+
+# Binário específico do projeto (se for o caso)
+rpg-api
+auth-api
+
+# Arquivo de lock do Cargo (para uso em projetos de um único dev)
+# Se você estiver em equipe, pode querer commitar este arquivo.
+Cargo.lock
+
+# Arquivos de IDEs e Editores de Código
+# VS Code
+.vscode/
+
+# IDEs da JetBrains (IntelliJ, CLion)
+.idea/
+
+# Binários e executáveis
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Arquivos temporários do Sistema Operacional
+.DS_Store
+Thumbs.db
