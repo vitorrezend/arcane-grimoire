@@ -79,6 +79,14 @@ function createSingleTraitElement(name, dotCount, initialValue, dataPath, option
     traitDiv.appendChild(nameElement);
     traitDiv.appendChild(markersDiv);
 
+    // Add a remove button for editable traits (backgrounds)
+    if (/^_{5,}$/.test(name)) {
+        const removeBtn = document.createElement('button');
+        removeBtn.className = 'remove-btn';
+        removeBtn.innerHTML = '&times;'; // 'X' symbol
+        traitDiv.appendChild(removeBtn);
+    }
+
     return traitDiv;
 }
 
