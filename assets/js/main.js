@@ -23,15 +23,18 @@ function initializeSheet() {
     createTraitBlock('spheres', Object.keys(characterData.advantages.spheres), 5, 0, { category: 'advantages', group: 'spheres' });
 
     // Other Traits that don't have a "group"
-    createTraitBlock('arete', ['Arete'], 10, 1, { category: 'advantages' });
-    createTraitBlock('willpower', ['Força de Vontade'], 10, 1, { category: 'advantages' });
-    createTraitBlock('quintessence', ['Quintessência'], 20, 0, { category: 'advantages' });
+    createTraitBlock('arete', ['Arete'], 10, 1, { category: 'advantages' }, { customClass: 'vertical-trait' });
+    createTraitBlock('willpower', ['Força de Vontade'], 10, 1, { category: 'advantages' }, { customClass: 'vertical-trait' });
+    createTraitBlock('quintessence', ['Quintessência'], 20, 0, { category: 'advantages' }, { markerType: 'checkbox', customClass: 'vertical-trait' });
 
     // Health Track
     createHealthTrack('health', characterData.health);
 
     // Other Traits
     createBlankLines('other-traits', 4);
+
+    // Add temporary willpower checkboxes
+    createCheckboxGrid('willpower-temporary', 10);
 }
 
 /**
@@ -42,7 +45,7 @@ function setupEventListeners() {
     if (!sheet) return;
 
     sheet.addEventListener('click', (event) => {
-        if (event.target.classList.contains('dot')) {
+        if (event.target.classList.contains('marker')) {
             handleDotClick(event.target);
         } else if (event.target.classList.contains('health-box')) {
             handleHealthBoxClick(event.target);
@@ -59,20 +62,20 @@ function handleDotClick(clickedDot) {
     if (!traitDiv) return;
 
     const dotsContainer = clickedDot.parentElement;
-    const allDots = dotsContainer.querySelectorAll('.dot');
+    const allMarkers = dotsContainer.querySelectorAll('.marker');
     const clickedValue = parseInt(clickedDot.dataset.value, 10);
     const nameElement = traitDiv.querySelector('.trait-label') || traitDiv.querySelector('.trait-input');
     const traitName = nameElement.tagName === 'LABEL' ? nameElement.textContent : nameElement.value;
 
     const { category, group } = traitDiv.dataset;
 
-    const currentValue = Array.from(allDots).filter(d => d.classList.contains('filled')).length;
+    const currentValue = Array.from(allMarkers).filter(d => d.classList.contains('filled')).length;
     const newValue = (clickedValue === currentValue) ? clickedValue - 1 : clickedValue;
 
     // Update UI
-    allDots.forEach(dot => {
-        const dotValue = parseInt(dot.dataset.value, 10);
-        dot.classList.toggle('filled', dotValue <= newValue);
+    allMarkers.forEach(marker => {
+        const markerValue = parseInt(marker.dataset.value, 10);
+        marker.classList.toggle('filled', markerValue <= newValue);
     });
 
     // Update Data Model
@@ -151,6 +154,29 @@ function createHealthTrack(targetId, healthLevels) {
     });
 
     targetElement.appendChild(fragment);
+}
+
+/**
+ * Creates a grid of checkboxes.
+ * @param {string} targetId - The ID of the container element.
+ * @param {number} count - The number of checkboxes to create.
+ */
+function createCheckboxGrid(targetId, count) {
+    const targetElement = document.getElementById(targetId);
+    if (!targetElement) return;
+
+    const container = document.createElement('div');
+    container.className = 'checkbox-grid';
+
+    for (let i = 0; i < count; i++) {
+        const box = document.createElement('div');
+        box.className = 'checkbox-marker';
+        // Note: These are not connected to the data model for now.
+        // They can be made interactive by adding event listeners similar to handleDotClick.
+        container.appendChild(box);
+    }
+
+    targetElement.appendChild(container);
 }
 
 /**
