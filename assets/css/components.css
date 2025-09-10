@@ -19,6 +19,26 @@
     border-color: #3a2d21;
 }
 
+.checkbox-marker {
+    width: 14px;
+    height: 14px;
+    border: 1px solid #3a2d21;
+    display: inline-block;
+    margin-left: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    background-color: #fff;
+}
+
+.checkbox-marker:hover {
+    background-color: #e0d8c4;
+}
+
+.checkbox-marker.filled {
+    background-color: #3a2d21;
+    border-color: #3a2d21;
+}
+
 /* Health Track Styles */
 .health-level {
     display: flex;
@@ -60,12 +80,26 @@
     color: #3a2d21;
 }
 
+.checkbox-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
 /* Trait Block Styles */
 .trait {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 8px;
+}
+
+.trait.vertical-trait {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
 }
 
 .trait-label, .trait-input {
