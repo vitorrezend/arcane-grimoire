@@ -11,7 +11,7 @@
  * @returns {HTMLElement} The created trait element.
  */
 function createSingleTraitElement(name, dotCount, initialValue, dataPath, options) {
-    const { markerType = 'dots', customClass = '', layout = 'linear' } = options;
+    const { markerType = 'dots', customClass = '', layout = 'linear', individualMarkers = false } = options;
 
     // Create the main container for the trait
     const traitDiv = document.createElement('div');
@@ -56,11 +56,16 @@ function createSingleTraitElement(name, dotCount, initialValue, dataPath, option
         // Add a common class for event handling
         marker.classList.add('marker');
 
-        if (i <= initialValue) {
+        if (!individualMarkers && i <= initialValue) {
             marker.classList.add('filled');
         }
-        // Add data-value for later use in event handling
-        marker.dataset.value = i;
+
+        // Add data-value for rating-style markers, or data-index for individual ones
+        if (individualMarkers) {
+            marker.dataset.index = i - 1;
+        } else {
+            marker.dataset.value = i;
+        }
 
         if (layout === 'circular') {
             const angle = (360 / dotCount) * i;
