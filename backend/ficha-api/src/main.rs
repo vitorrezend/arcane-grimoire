@@ -41,6 +41,7 @@ async fn main() {
 async fn salvar_ficha(collection: &Collection<Ficha>, ficha: &Ficha) -> mongodb::error::Result<()> {
     // Insere o documento na coleção.
     let serialized_doc = mongodb::bson::to_document(&ficha)?;
-    collection.insert_one(serialized_doc, None).await?;
+    //collection.insert_one(serialized_doc, None).await?;
+    collection.insert_one(ficha, None).await?;
     Ok(())
 }
